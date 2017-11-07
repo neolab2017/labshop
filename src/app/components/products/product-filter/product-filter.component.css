@@ -1,0 +1,9 @@
+.sticky-top {
+    top: 80px;
+}
+
+.activate {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+} 

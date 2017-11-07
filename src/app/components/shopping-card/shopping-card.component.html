@@ -1,0 +1,76 @@
+<h1>Order Cart</h1>
+<ng-container *ngIf="cardSumm">
+    <h5>You have {{cardSumm}} items</h5>
+    <p>
+        <button 
+        *ngIf="keyproductlist.length"
+        (click)="clearCart()"
+        class="btn btn-light btn-sm"> Clear Order Cart</button>
+    </p>    
+</ng-container>
+
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Img</th>
+       
+        <th>Name</th>
+        <th class="text-center">Price</th>
+        <th class="text-center">Count</th>
+        <th class="text-right">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+          <tr  *ngFor = "let key of keyproductlist; let number = index" >
+            
+              <td>{{number+1}}</td>
+             <td><img class="thumbnail" [src]="productlist[key].product.imageUrl" alt=""></td>
+              <td>{{productlist[key].product.title}}</td>
+              <td class="text-center">{{productlist[key].product.price}}</td>
+              <td class="text-center" style="width:100px">       
+                         <div class="row no-gutters">
+                    
+                                  <div class="col-2">
+                                      <button 
+                                      (click)=removeFromCart(key)
+                                      class="bth btn -secondary btn-block pointer">-</button>
+                                    </div>
+                                    <div class="col text-center">
+                                        {{productlist[key].quantity}}
+                                    </div>
+                                    <div class="col-2">
+                                        <button 
+                                        (click)="addToCart(key)"
+                                        class="bth btn -secondary btn-block pointer">+</button>
+                                      </div>
+                    
+                              </div> 
+                      </td>
+               <td class="text-right">{{productlist[key].quantity * productlist[key].product.price | currency: 'UAH':true }}  </td>
+            </tr>
+  
+
+     
+    </tbody>
+    <tfoot>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+       
+        <th class="text-right">{{totalSumm | currency: 'UAH':true}}</th>        
+      </tr>
+    </tfoot>
+  </table>
+
+  <a 
+  *ngIf="keyproductlist.length"
+  routerLink="/check-out"
+  class="btn btn-primary"> Check Out</a>
+
